@@ -4,8 +4,8 @@
 transaction-type="JTA">
 <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 <jta-data-source>java:/pos</jta-data-source>
-<class>com.solutioniabd.entity.Customer</class>
 <class>com.solutioniabd.entity.Customeraddress</class>
+<class>com.solutioniabd.entity.Customer</class>
 <exclude-unlisted-classes>false</exclude-unlisted-classes>
 
 <properties>

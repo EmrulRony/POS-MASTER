@@ -28,7 +28,7 @@ public class Customeraddress implements Serializable {
 
 	private String road;
 
-	//bi-directional many-to-one association to Customer
+	
 	@OneToOne(mappedBy="customeraddresses")
 	private Customer customer;
 

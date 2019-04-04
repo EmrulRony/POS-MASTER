@@ -8,7 +8,7 @@ import com.solutioniabd.entity.Customer;
 
 @Local
 public interface CustomerServiceLocal {
-	public void createCustomer();
+	public void createCustomer(Customer customer);
 	public void updateCustomer(Customer customer);
 	public void deleteCustomer(int customerId);
 	public List<Customer> listCustomer();

@@ -1,12 +1,52 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"> 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
-<h:head>Customer Management</h:head> 
-<body> 
+<h:head>Customer Management</h:head>
+<h:body>
 
-</body> 
+	<h:form>
+		<p:panel header="Create Customers">
+
+			<p:messages>
+				<p:autoUpdate />
+			</p:messages>
+
+			<h:panelGrid id="add_cus_panel_grid" columns="4" cellpadding="2">
+			
+				<h:outputLabel for="customer_name" value="Customer Name:"
+					style="font-weight:bold" />
+				<p:inputText id="customer_name"
+					value="#{customerManagement.customer.customerName}" required="true"
+					label="Customer Name" />
+				<p:message for="customer_name" />
+				<h:outputText value="#{customerManagement.customer.customerName}" />
+				
+				
+				<h:outputLabel for="customer_phone" value="Customer Phone:"
+					style="font-weight:bold" />
+				<p:inputText id="customer_phone"
+					value="#{customerManagement.customer.customerPhone}"
+					label="Customer Phone" />
+				<p:message for="customer_phone" />
+				<h:outputText value="#{customerManagement.customer.customerName}" />
+
+
+				<h:outputLabel for="customer_mail" value="Customer Mail:"
+					style="font-weight:bold" />
+				<p:inputText id="customer_mail"
+					value="#{customerManagement.customer.customerEmail}"
+					label="Customer Mail" />
+				<p:message for="customer_mail" />
+				<h:outputText value="#{customerManagement.customer.customerName}" />
+				
+
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+
+</h:body>
 </html>
