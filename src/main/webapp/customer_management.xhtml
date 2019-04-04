@@ -9,14 +9,14 @@
 <h:body>
 
 	<h:form>
-		<p:panel header="Create Customers">
+		<p:panel>
 
 			<p:messages>
 				<p:autoUpdate />
 			</p:messages>
 
 			<h:panelGrid id="add_cus_panel_grid" columns="4" cellpadding="2">
-			
+
 				<h:outputLabel for="customer_name" value="Customer Name:"
 					style="font-weight:bold" />
 				<p:inputText id="customer_name"
@@ -24,15 +24,15 @@
 					label="Customer Name" />
 				<p:message for="customer_name" />
 				<h:outputText value="#{customerManagement.customer.customerName}" />
-				
-				
+
+
 				<h:outputLabel for="customer_phone" value="Customer Phone:"
 					style="font-weight:bold" />
 				<p:inputText id="customer_phone"
 					value="#{customerManagement.customer.customerPhone}"
 					label="Customer Phone" />
 				<p:message for="customer_phone" />
-				<h:outputText value="#{customerManagement.customer.customerName}" />
+				<h:outputText value="#{customerManagement.customer.customerPhone}" />
 
 
 				<h:outputLabel for="customer_mail" value="Customer Mail:"
@@ -41,11 +41,46 @@
 					value="#{customerManagement.customer.customerEmail}"
 					label="Customer Mail" />
 				<p:message for="customer_mail" />
-				<h:outputText value="#{customerManagement.customer.customerName}" />
-				
+				<h:outputText value="#{customerManagement.customer.customerEmail}" />
+
+				<h:outputLabel for="customer_house" value="House No:"
+					style="font-weight:bold" />
+				<p:inputText id="customer_house"
+					value="#{customerManagement.customeraddress.houseNo}"
+					label="Customer House No." />
+				<p:message for="customer_house" />
+				<h:outputText value="#{customerManagement.customeraddress.houseNo}" />
+
+				<h:outputLabel for="customer_road" value="Road Name:"
+					style="font-weight:bold" />
+				<p:inputText id="customer_road"
+					value="#{customerManagement.customeraddress.road}"
+					label="Road Name" />
+				<p:message for="customer_road" />
+				<h:outputText value="#{customerManagement.customeraddress.road}" />
+
+				<h:outputLabel for="customer_area" value="Area:"
+					style="font-weight:bold" />
+				<p:inputText id="customer_area"
+					value="#{customerManagement.customeraddress.area}"
+					label="Area Name" />
+				<p:message for="customer_area" />
+				<h:outputText value="#{customerManagement.customeraddress.area}" />
+
+				<h:outputLabel for="customer_zip" value="ZIP:"
+					style="font-weight:bold" />
+				<p:inputText id="customer_zip"
+					value="#{customerManagement.customeraddress.postalCode}"
+					label="ZIP" />
+				<p:message for="customer_zip" />
+				<h:outputText
+					value="#{customerManagement.customeraddress.postalCode}" />
 
 			</h:panelGrid>
+
 		</p:panel>
+					<p:commandButton value="Submit" ajax="false" actionListener="#{customerManagement.saveCustomer()}" icon="pi pi-check"
+				validateClient="true" style="margin-right:10px" />
 	</h:form>
 
 </h:body>

@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.solutioniabd.entity.Customer;
+import com.solutioniabd.entity.Customeraddress;
 
 @Stateless
 public class CustomerService implements CustomerServiceLocal {
@@ -17,8 +18,10 @@ public class CustomerService implements CustomerServiceLocal {
 	EntityManager em;
 
 	@Override
-	public void createCustomer(Customer customer) {
+	public void createCustomer(Customer customer,Customeraddress customeraddress) {
 		em.persist(customer);
+		em.persist(customeraddress);
+		em.flush();
 	}
 
 	@Override
