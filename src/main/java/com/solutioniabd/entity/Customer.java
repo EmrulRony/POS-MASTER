@@ -28,16 +28,8 @@ public class Customer implements Serializable {
 	@Column(name="customer_phone")
 	private int customerPhone;
 	
-	public Customeraddress getCustomeraddresses() {
-		return customeraddresses;
-	}
 
-	public void setCustomeraddresses(Customeraddress customeraddresses) {
-		this.customeraddresses = customeraddresses;
-	}
-
-	@OneToOne
-	@JoinColumn(name="address_id")
+	@OneToOne(mappedBy="customer")
 	private Customeraddress customeraddresses;
 
 	public Customer() {
@@ -73,6 +65,14 @@ public class Customer implements Serializable {
 
 	public void setCustomerPhone(int customerPhone) {
 		this.customerPhone = customerPhone;
+	}
+	
+	public Customeraddress getCustomeraddresses() {
+		return customeraddresses;
+	}
+
+	public void setCustomeraddresses(Customeraddress customeraddresses) {
+		this.customeraddresses = customeraddresses;
 	}
 
 }

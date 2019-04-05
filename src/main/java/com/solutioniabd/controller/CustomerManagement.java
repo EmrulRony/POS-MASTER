@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -43,6 +45,10 @@ public class CustomerManagement implements Serializable {
 		this.customeraddress = customeraddress;
 	}
 	public void saveCustomer() {
+		FacesContext  context = FacesContext.getCurrentInstance();
+		
+		customer.setCustomeraddresses(customeraddress);
+		customeraddress.setCustomer(customer);
 		System.out.println("--------------Saving Customer------------");
 		try{
 			customerService.createCustomer(customer,customeraddress);
@@ -50,7 +56,15 @@ public class CustomerManagement implements Serializable {
 		catch(Exception e) {
 			System.out.println(e);
 		}
-		System.out.println("----------Customer Saved!!--------------");
+		finally {
+			context.addMessage(null, new FacesMessage("Successful","User created!"));
+			clearCustomerForm();
+		}
+		
+	}
+	
+	public void clearCustomerForm() {
+		customer.setCustomerName(null);
 	}
 		
 }

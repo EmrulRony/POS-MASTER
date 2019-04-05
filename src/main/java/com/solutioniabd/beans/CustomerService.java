@@ -22,6 +22,7 @@ public class CustomerService implements CustomerServiceLocal {
 		em.persist(customer);
 		em.persist(customeraddress);
 		em.flush();
+		System.out.println("----------Customer Saved!!--------------");
 	}
 
 	@Override

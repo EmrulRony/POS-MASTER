@@ -30,7 +30,8 @@ public class Customeraddress implements Serializable {
 	private String road;
 
 	
-	@OneToOne(mappedBy="customeraddresses")
+	@OneToOne
+	@JoinColumn(name="customer_id")
 	private Customer customer;
 
 	public Customeraddress() {
