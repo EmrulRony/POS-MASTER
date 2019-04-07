@@ -39,7 +39,6 @@ public class CustomerService implements CustomerServiceLocal {
 
 	@Override
 	public List<Customer> listCustomer() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

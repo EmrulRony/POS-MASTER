@@ -8,12 +8,12 @@
 <h:head>Customer Management</h:head>
 <h:body>
 
-	<h:form>
+	<h:form method="post">
 		<p:panel>
 
 			<p:growl id="growl" showDetail="true" sticky="false" />
 
-			<p:messages >
+			<p:messages closable="true">
 				<p:autoUpdate />
 			</p:messages>
 
@@ -22,7 +22,7 @@
 				<h:outputLabel for="customer_name" value="Customer Name:"
 					style="font-weight:bold" />
 				<p:inputText id="customer_name"
-					value="#{customerManagement.customer.customerName}" required="true"
+					value="#{customerManagement.customerName}" required="true"
 					label="Customer Name" />
 				<p:message for="customer_name" />
 				<h:outputText value="#{customerManagement.customer.customerName}" />
@@ -31,7 +31,7 @@
 				<h:outputLabel for="customer_phone" value="Customer Phone:"
 					style="font-weight:bold" />
 				<p:inputText id="customer_phone"
-					value="#{customerManagement.customer.customerPhone}"
+					value="#{customerManagement.customerNumber}"
 					label="Customer Phone" />
 				<p:message for="customer_phone" />
 				<h:outputText value="#{customerManagement.customer.customerPhone}" />

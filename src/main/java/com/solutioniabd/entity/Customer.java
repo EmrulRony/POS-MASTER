@@ -1,6 +1,8 @@
 package com.solutioniabd.entity;
 
 import java.io.Serializable;
+
+import javax.inject.Named;
 import javax.persistence.*;
 
 
@@ -9,8 +11,9 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name="customer")
+@Table(name = "customer")
 @NamedQuery(name="Customer.findAll", query="SELECT c FROM Customer c")
+@Named
 public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
