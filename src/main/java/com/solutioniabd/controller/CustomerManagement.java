@@ -1,6 +1,7 @@
 package com.solutioniabd.controller;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -26,29 +27,30 @@ public class CustomerManagement implements Serializable {
 	CustomerServiceLocal customerService;
 	
 	// Models
-	@Inject
-	private Customer customer;
-	@Inject
-	private Customeraddress customeraddress;
+	private Customer customer = new Customer();
+
+	private Customeraddress customeraddress= new Customeraddress();
 	
 	// Fields 
 	
-	private String customerName;
-	private int customerNumber;
+	private List<Customer> listOfCustomers;
+	
 	
 
 	@PostConstruct
 	public void init() {
 		
 		System.out.println("CustomerManagement instantiated");
+		listOfCustomers= customerService.listCustomer();
+			
 	}
 	
 	@PreDestroy
 	public void destroy() {
 		System.out.println("Destroy method called!!");
+		
 	}
-	
-	
+		
 	
 	// 
 	public void saveCustomer() {
@@ -57,8 +59,6 @@ public class CustomerManagement implements Serializable {
 		customer.setCustomeraddresses(customeraddress);
 		customeraddress.setCustomer(customer);
 		
-		customer.setCustomerName(customerName);
-		customer.setCustomerPhone(customerNumber);
 		System.out.println("--------------Saving Customer------------");
 		try{
 			customerService.createCustomer(customer,customeraddress);
@@ -68,6 +68,7 @@ public class CustomerManagement implements Serializable {
 		}
 		finally {
 			context.addMessage(null, new FacesMessage("Successful","User created!"));
+			listOfCustomers=customerService.listCustomer();
 			
 		}
 		
@@ -93,26 +94,12 @@ public class CustomerManagement implements Serializable {
 	public void setCustomeraddress(Customeraddress customeraddress) {
 		this.customeraddress = customeraddress;
 	}
-	
-	public String getCustomerName() {
-		return customerName;
+
+	public List<Customer> getListOfCustomers() {
+		
+		return listOfCustomers;
+		
 	}
 
-
-
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
-	}
-
-
-
-	public int getCustomerNumber() {
-		return customerNumber;
-	}
-
-
-	public void setCustomerNumber(int customerNumber) {
-		this.customerNumber = customerNumber;
-	}
 		
 }

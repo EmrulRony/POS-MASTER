@@ -4,10 +4,12 @@ import java.util.List;
 
 import javax.ejb.Singleton;
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Typed;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import com.solutioniabd.entity.Customer;
 import com.solutioniabd.entity.Customeraddress;
@@ -39,7 +41,9 @@ public class CustomerService implements CustomerServiceLocal {
 
 	@Override
 	public List<Customer> listCustomer() {
-		return null;
+		TypedQuery<Customer> query=em.createNamedQuery("Customer.findAll.join.CustomerAddress", Customer.class);
+		List<Customer> customerList=query.getResultList();
+		return customerList;
 	}
 	
 

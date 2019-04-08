@@ -13,16 +13,14 @@
 
 			<p:growl id="growl" showDetail="true" sticky="false" />
 
-			<p:messages closable="true">
-				<p:autoUpdate />
-			</p:messages>
+			<p:messages closable="true" autoUpdate="true"/>
 
 			<h:panelGrid id="add_cus_panel_grid" columns="4" cellpadding="2">
 
 				<h:outputLabel for="customer_name" value="Customer Name:"
 					style="font-weight:bold" />
 				<p:inputText id="customer_name"
-					value="#{customerManagement.customerName}" required="true"
+					value="#{customerManagement.customer.customerName}" required="true"
 					label="Customer Name" />
 				<p:message for="customer_name" />
 				<h:outputText value="#{customerManagement.customer.customerName}" />
@@ -31,7 +29,7 @@
 				<h:outputLabel for="customer_phone" value="Customer Phone:"
 					style="font-weight:bold" />
 				<p:inputText id="customer_phone"
-					value="#{customerManagement.customerNumber}"
+					value="#{customerManagement.customer.customerPhone}"
 					label="Customer Phone" />
 				<p:message for="customer_phone" />
 				<h:outputText value="#{customerManagement.customer.customerPhone}" />
@@ -83,14 +81,29 @@
 				actionListener="#{customerManagement.saveCustomer()}"
 				icon="pi pi-check" validateClient="true" style="margin-right:10px" />
 
-			<p:commandButton value="Submit(ajax)" update="add_cus_panel_grid"
+			<p:commandButton value="Submit(ajax)" update="customer_list"
 				icon="pi pi-check"
 				actionListener="#{customerManagement.saveCustomer()}"
 				validateClient="true" style="margin-right:10px" />
-
 		</p:panel>
-
 	</h:form>
+
+	<p:dataTable var="customers" id="customer_list" value="#{customerManagement.listOfCustomers}">
+		<p:column headerText="CustomerId">
+			<h:outputText value="#{customers.customerId}" />
+		</p:column>
+
+		<p:column headerText="CustomerName">
+			<h:outputText value="#{customers.customerName}" />
+		</p:column>
+		
+		<p:column headerText="CustomerZip">
+			<h:outputText value="#{customers.customeraddresses.postalCode}" />
+		</p:column>
+
+	</p:dataTable>
+
+
 
 </h:body>
 </html>
