@@ -13,7 +13,10 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.event.RowEditEvent;
+
 import com.solutioniabd.beans.CustomerServiceLocal;
+import com.solutioniabd.entity.Car;
 import com.solutioniabd.entity.Customer;
 import com.solutioniabd.entity.Customeraddress;
 
@@ -79,6 +82,27 @@ public class CustomerManagement implements Serializable {
 	public void clearCustomerForm() {
 		customer.setCustomerName(null);
 	}
+	
+	// Buttons and Events
+	
+	 public void onRowEdit(RowEditEvent event) {
+	        FacesMessage msg = new FacesMessage("Car Edited");
+	        FacesContext.getCurrentInstance().addMessage(null, msg);
+	        Customer customer = (Customer) event.getObject();
+	        Customeraddress cusAddress =(Customeraddress) customer.getCustomeraddresses();
+	        customerService.updateCustomer(customer,cusAddress);
+	        listOfCustomers=customerService.listCustomer();
+	    }
+	     
+	    public void onRowCancel(RowEditEvent event) {
+	        FacesMessage msg = new FacesMessage("Edit Cancelled");
+	        FacesContext.getCurrentInstance().addMessage(null, msg);
+	    }
+	    
+	    public void onRowDelete(int customerId,int addressId) {
+	    	customerService.deleteCustomer(customerId, addressId);
+	    	listOfCustomers=customerService.listCustomer();
+	    }
 	
 	// Getters and setters
 	public Customer getCustomer() {

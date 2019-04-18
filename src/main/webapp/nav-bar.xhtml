@@ -1,9 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
 
 <head>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -14,8 +13,9 @@
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css"/>
-</head>
-<h:body>
+</head> 
+<body> 
+<ui:composition>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light"> <a
 		class="navbar-brand" href="#">POS-Master</a>
 		<div class="container">
@@ -52,15 +52,7 @@
 				</form>
 			</div>
 		</div>
-
 	</nav>
-
-	<h:form>
-		<h:commandButton class="btn btn-secondary"
-			action="#{homeController.customerManagementBtn()}"
-			value="Student Management" />
-		
-	</h:form>
-	
-</h:body>
+	</ui:composition>
+</body> 
 </html>

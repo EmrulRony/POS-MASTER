@@ -5,105 +5,166 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>Customer Management</h:head>
+<h:head>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css"
+	href="resources/css/bootstrap.css" />
+</h:head>
 <h:body>
+	<div class="nav-bar">
+		<ui:include src="/nav-bar.xhtml" />
+	</div>
+	<h1>Hello JSF</h1>
+	<div class="customer_management">
+		<h:form id="add_customer">
+			<p:panel>
+				<p:growl id="growl" showDetail="true" sticky="false" />
 
-	<h:form method="post">
-		<p:panel>
+				<p:messages closable="true" autoUpdate="true" />
 
-			<p:growl id="growl" showDetail="true" sticky="false" />
+				<h:panelGrid id="add_cus_panel_grid" columns="4" cellpadding="2">
 
-			<p:messages closable="true" autoUpdate="true"/>
-
-			<h:panelGrid id="add_cus_panel_grid" columns="4" cellpadding="2">
-
-				<h:outputLabel for="customer_name" value="Customer Name:"
-					style="font-weight:bold" />
-				<p:inputText id="customer_name"
-					value="#{customerManagement.customer.customerName}" required="true"
-					label="Customer Name" />
-				<p:message for="customer_name" />
-				<h:outputText value="#{customerManagement.customer.customerName}" />
-
-
-				<h:outputLabel for="customer_phone" value="Customer Phone:"
-					style="font-weight:bold" />
-				<p:inputText id="customer_phone"
-					value="#{customerManagement.customer.customerPhone}"
-					label="Customer Phone" />
-				<p:message for="customer_phone" />
-				<h:outputText value="#{customerManagement.customer.customerPhone}" />
+					<h:outputLabel for="customer_name" value="Customer Name:"
+						style="font-weight:bold" />
+					<p:inputText id="customer_name"
+						value="#{customerManagement.customer.customerName}"
+						required="true" label="Customer Name" />
+					<p:message for="customer_name" />
+					<h:outputText value="#{customerManagement.customer.customerName}" />
 
 
-				<h:outputLabel for="customer_mail" value="Customer Mail:"
-					style="font-weight:bold" />
-				<p:inputText id="customer_mail"
-					value="#{customerManagement.customer.customerEmail}"
-					label="Customer Mail" />
-				<p:message for="customer_mail" />
-				<h:outputText value="#{customerManagement.customer.customerEmail}" />
-
-				<h:outputLabel for="customer_house" value="House No:"
-					style="font-weight:bold" />
-				<p:inputText id="customer_house"
-					value="#{customerManagement.customeraddress.houseNo}"
-					label="Customer House No." />
-				<p:message for="customer_house" />
-				<h:outputText value="#{customerManagement.customeraddress.houseNo}" />
-
-				<h:outputLabel for="customer_road" value="Road Name:"
-					style="font-weight:bold" />
-				<p:inputText id="customer_road"
-					value="#{customerManagement.customeraddress.road}"
-					label="Road Name" />
-				<p:message for="customer_road" />
-				<h:outputText value="#{customerManagement.customeraddress.road}" />
-
-				<h:outputLabel for="customer_area" value="Area:"
-					style="font-weight:bold" />
-				<p:inputText id="customer_area"
-					value="#{customerManagement.customeraddress.area}"
-					label="Area Name" />
-				<p:message for="customer_area" />
-				<h:outputText value="#{customerManagement.customeraddress.area}" />
-
-				<h:outputLabel for="customer_zip" value="ZIP:"
-					style="font-weight:bold" />
-				<p:inputText id="customer_zip"
-					value="#{customerManagement.customeraddress.postalCode}"
-					label="ZIP" />
-				<p:message for="customer_zip" />
-				<h:outputText
-					value="#{customerManagement.customeraddress.postalCode}" />
-
-			</h:panelGrid>
-			<p:commandButton value="Submit(non-ajax)" ajax="false"
-				actionListener="#{customerManagement.saveCustomer()}"
-				icon="pi pi-check" validateClient="true" style="margin-right:10px" />
-
-			<p:commandButton value="Submit(ajax)" update="customer_list"
-				icon="pi pi-check"
-				actionListener="#{customerManagement.saveCustomer()}"
-				validateClient="true" style="margin-right:10px" />
-		</p:panel>
-	</h:form>
-
-	<p:dataTable var="customers" id="customer_list" value="#{customerManagement.listOfCustomers}">
-		<p:column headerText="CustomerId">
-			<h:outputText value="#{customers.customerId}" />
-		</p:column>
-
-		<p:column headerText="CustomerName">
-			<h:outputText value="#{customers.customerName}" />
-		</p:column>
-		
-		<p:column headerText="CustomerZip">
-			<h:outputText value="#{customers.customeraddresses.postalCode}" />
-		</p:column>
-
-	</p:dataTable>
+					<h:outputLabel for="customer_phone" value="Customer Phone:"
+						style="font-weight:bold" />
+					<p:inputText id="customer_phone"
+						value="#{customerManagement.customer.customerPhone}"
+						label="Customer Phone" />
+					<p:message for="customer_phone" />
+					<h:outputText value="#{customerManagement.customer.customerPhone}" />
 
 
+					<h:outputLabel for="customer_mail" value="Customer Mail:"
+						style="font-weight:bold" />
+					<p:inputText id="customer_mail"
+						value="#{customerManagement.customer.customerEmail}"
+						label="Customer Mail" />
+					<p:message for="customer_mail" />
+					<h:outputText value="#{customerManagement.customer.customerEmail}" />
+
+					<h:outputLabel for="customer_house" value="House No:"
+						style="font-weight:bold" />
+					<p:inputText id="customer_house"
+						value="#{customerManagement.customeraddress.houseNo}"
+						label="Customer House No." />
+					<p:message for="customer_house" />
+					<h:outputText value="#{customerManagement.customeraddress.houseNo}" />
+
+					<h:outputLabel for="customer_road" value="Road Name:"
+						style="font-weight:bold" />
+					<p:inputText id="customer_road"
+						value="#{customerManagement.customeraddress.road}"
+						label="Road Name" />
+					<p:message for="customer_road" />
+					<h:outputText value="#{customerManagement.customeraddress.road}" />
+
+					<h:outputLabel for="customer_area" value="Area:"
+						style="font-weight:bold" />
+					<p:inputText id="customer_area"
+						value="#{customerManagement.customeraddress.area}"
+						label="Area Name" />
+					<p:message for="customer_area" />
+					<h:outputText value="#{customerManagement.customeraddress.area}" />
+
+					<h:outputLabel for="customer_zip" value="ZIP:"
+						style="font-weight:bold" />
+					<p:inputText id="customer_zip"
+						value="#{customerManagement.customeraddress.postalCode}"
+						label="ZIP" />
+					<p:message for="customer_zip" />
+					<h:outputText
+						value="#{customerManagement.customeraddress.postalCode}" />
+
+				</h:panelGrid>
+				<p:commandButton value="Submit(non-ajax)" ajax="false"
+					actionListener="#{customerManagement.saveCustomer()}"
+					icon="pi pi-check" validateClient="true" style="margin-right:10px" />
+
+				<p:commandButton value="Submit(ajax)"
+					update="customer_list,add_cus_panel_grid" icon="pi pi-check"
+					actionListener="#{customerManagement.saveCustomer()}"
+					validateClient="true" style="margin-right:10px" />
+			</p:panel>
+		</h:form>
+	</div>
+
+	<div class="customer_management">
+		<h:form id="customer_lst_tbl" prependId="false">
+			<p:growl id="msgs" showDetail="true" />
+
+			<p:dataTable var="customers" id="customer_list" editable="true"
+				value="#{customerManagement.listOfCustomers}">
+				<f:facet name="header">
+            Customer List
+        </f:facet>
+
+				<p:ajax event="rowEdit" listener="#{customerManagement.onRowEdit}"
+					update="msgs" />
+				<p:ajax event="rowEditCancel"
+					listener="#{customerManagement.onRowCancel}" update="msgs" />
+
+				<p:column headerText="CustomerId">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{customers.customerId}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{customers.customerId}" style="width:100%"
+								label="Year" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="CustomerName">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{customers.customerName}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{customers.customerName}" style="width:100%"
+								label="Year" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="PostalCode">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{customers.customeraddresses.postalCode}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{customers.customeraddresses.postalCode}"
+								style="width:100%" label="Year" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="DeleteCustomer">
+					<p:commandButton update="customer_list" icon="fa-remove"
+						actionListener="#{customerManagement.onRowDelete(customers.customerId,customers.customeraddresses.addressId)}" />
+				</p:column>
+
+				<p:column headerText="EditCustomer">
+					<p:rowEditor />
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+	</div>
 
 </h:body>
 </html>

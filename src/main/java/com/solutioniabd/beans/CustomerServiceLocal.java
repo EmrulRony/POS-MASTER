@@ -10,7 +10,7 @@ import com.solutioniabd.entity.Customeraddress;
 @Local
 public interface CustomerServiceLocal {
 	public void createCustomer(Customer customer,Customeraddress customeraddress);
-	public void updateCustomer(Customer customer);
-	public void deleteCustomer(int customerId);
+	public void updateCustomer(Customer customer,Customeraddress customeraddress);
+	public void deleteCustomer(int customerId, int addressId);
 	public List<Customer> listCustomer();
 }

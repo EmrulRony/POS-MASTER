@@ -28,15 +28,19 @@ public class CustomerService implements CustomerServiceLocal {
 	}
 
 	@Override
-	public void updateCustomer(Customer customer) {
-		// TODO Auto-generated method stub
-		
+	public void updateCustomer(Customer customer, Customeraddress customeraddress) {
+		em.merge(customer);
+		em.merge(customeraddress);
+		em.flush();
 	}
 
 	@Override
-	public void deleteCustomer(int customerId) {
-		// TODO Auto-generated method stub
-		
+	public void deleteCustomer(int customerId, int addressId) {
+		Customer customer=em.find(Customer.class, customerId);
+		Customeraddress customerAddress=em.find(Customeraddress.class, customerId);
+		em.remove(customer);
+		em.remove(customerAddress);
+		System.out.println("Customer Removed");
 	}
 
 	@Override
