@@ -1,0 +1,76 @@
+create database POS;
+use POS;
+
+create Table CUSTOMER(
+customer_id int not null auto_increment,
+customer_name varchar (30) not null,
+customer_phone int not null,
+customer_email varchar(50),
+primary key (customer_id)
+);
+
+create table CUSTOMERADDRESS(
+address_id int auto_increment,
+house_no varchar (20),
+road varchar (20),
+area varchar(50),
+postal_code int (5),
+customer_id int,
+primary key (address_id),
+foreign key(customer_id) references CUSTOMER(customer_id)
+);
+
+create table PRODUCT(
+product_id int auto_increment,
+product_name varchar(50) not null,
+product_color1 varchar(10),
+product_color2 varchar(10),
+product_color3 varchar(10),
+product_color4 varchar(10),
+product_color5 varchar(10),
+product_color6 varchar(10),
+buying_price int,
+selling_price int,
+expiry_date date,
+made_by_country varchar(20),
+catagory_id int,
+primary key(product_id)
+);
+
+create table CATAGORY(
+catagory_id int auto_increment,
+catagory_name varchar(30),
+primary key(catagory_id)
+);
+
+create table ORDERS(
+order_id int auto_increment,
+date_of_order date,
+remarks varchar(200),
+discount int,
+primary key (order_id),
+customer_id int,
+foreign key(customer_id) references CUSTOMER(customer_id)
+);
+
+create table ORDER_ITEMS(
+item_id int auto_increment,
+item_name varchar(50),
+item_quantity int,
+discount int,
+product_id int,
+primary key(item_id),
+foreign key (product_id) references PRODUCT(product_id)
+);
+
+create table ORDERS_ORDER_ITEMS(
+orders_order_item_id int auto_increment,
+order_id int,
+item_id int,
+primary key(orders_order_item_id),
+foreign key(order_id) references ORDERS(order_id),
+foreign key(item_id) references ORDER_ITEMS(item_id)
+);
+
+alter table PRODUCT ADD catagory_id int;
+alter table PRODUCT add constraint foreign key(catagory_id) references CATAGORY(catagory_id);
