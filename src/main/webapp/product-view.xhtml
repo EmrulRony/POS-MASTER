@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputScript library="js" name="bootstrap.min.js" />
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+</h:head>
+<h:body>
+
+	<!-- NAV BAR  -->
+	<div class="nav-bar">
+		<ui:include src="/nav-bar.xhtml" />
+	</div>
+	<h1>PRODUCT MANAGEMENT</h1>
+
+	<!-- GRID -->
+	<div class="customer-mgmt" style="padding: 20px">
+		<div class="row">
+
+			<!-- Add product form -->
+			<div class="col col-lg-4">
+
+				<h:form>
+					<p:panel header="ADD PRODUCTS">
+						<p:messages>
+							<p:autoUpdate />
+						</p:messages>
+
+						<h:panelGrid id="grid" columns="4" cellpadding="5">
+						
+							<h:outputLabel for="name" value="Name:" style="font-weight:bold" />
+							<p:inputText id="name" value="#{productController.product.productName}"
+								required="true" label="Name" />
+							<p:message for="name" />
+							<h:outputText value="#{productController.product.productName}" />
+							
+							<h:outputLabel for="color1" value="Color1:" style="font-weight:bold" />
+							 <p:selectOneMenu id="color1" value="#{productController.product.productColor1}" style="width:150px">
+			                <f:selectItem itemLabel="Select Color" itemValue="" noSelectionOption="true" />
+			                <f:selectItems value="#{productController.colors}" />
+			         	   </p:selectOneMenu>
+										
+						
+						</h:panelGrid>
+
+						<p:commandButton value="Ajax" update="grid" icon="pi pi-check"
+							validateClient="true" style="margin-right:10px" actionListener="#{productController.saveProduct()}"/>
+
+					</p:panel>
+				</h:form>
+
+
+			</div>
+
+			<!-- List customer column -->
+
+			<div class="col col-lg-8"></div>
+		</div>
+	</div>
+
+
+
+
+
+</h:body>
+</html>
