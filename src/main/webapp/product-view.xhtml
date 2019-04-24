@@ -31,24 +31,72 @@
 						</p:messages>
 
 						<h:panelGrid id="grid" columns="4" cellpadding="5">
-						
+
 							<h:outputLabel for="name" value="Name:" style="font-weight:bold" />
-							<p:inputText id="name" value="#{productController.product.productName}"
-								required="true" label="Name" />
+							<p:inputText id="name"
+								value="#{productController.product.productName}" required="true"
+								label="Name" />
 							<p:message for="name" />
 							<h:outputText value="#{productController.product.productName}" />
-							
-							<h:outputLabel for="color1" value="Color1:" style="font-weight:bold" />
-							 <p:selectOneMenu id="color1" value="#{productController.product.productColor1}" style="width:150px">
-			                <f:selectItem itemLabel="Select Color" itemValue="" noSelectionOption="true" />
-			                <f:selectItems value="#{productController.colors}" />
-			         	   </p:selectOneMenu>
-										
-						
+
+							<p:outputLabel value="Simple:" for="acSimple" />
+							<p:autoComplete id="acSimple" value="#{productController.text1}"
+								completeMethod="#{productController.completeText}" />
+							<p:message for="acSimple" />
+							<h:outputText value="#{productController.text1}" />
+
+							<h:outputLabel for="color1" value="Color1:"
+								style="font-weight:bold" />
+							<p:selectOneMenu id="color1"
+								value="#{productController.product.productColor1}"
+								style="width:150px">
+								<f:selectItem itemLabel="Select Color" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems value="#{productController.colors}" />
+							</p:selectOneMenu>
+							<p:message for="color1" />
+							<h:outputText value="#{productController.product.productColor1}" />
+
+							<h:outputLabel for="buying-price" value="Buying Price:"
+								style="font-weight:bold" />
+							<p:inputText id="buying-price"
+								value="#{productController.product.buyingPrice}" required="true"
+								label="Buying Price" />
+							<p:message for="buying-price" />
+							<h:outputText value="#{productController.product.buyingPrice}" />
+
+							<h:outputLabel for="selling-price" value="Selling Price:"
+								style="font-weight:bold" />
+							<p:inputText id="selling-price"
+								value="#{productController.product.sellingPrice}"
+								required="true" label="Selling Price" />
+							<p:message for="selling-price" />
+							<h:outputText value="#{productController.product.sellingPrice}" />
+
+							<p:outputLabel for="expiry-date" value="Expiry Date:"
+								style="font-weight:bold" />
+							<p:calendar id="expiry-date"
+								value="#{productController.product.expiryDate}" showIcon="true" />
+							<p:message for="expiry-date" />
+							<h:outputText value="#{productController.product.expiryDate}" />
+
+							<h:outputLabel for="catagory" value="Catagory:"
+								style="font-weight:bold" />
+							<p:selectOneMenu id="catagory"
+								value="#{productController.catagory.catagoryName}"
+								style="width:150px">
+								<f:selectItem itemLabel="Select Catagory" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems value="#{productController.catList}" />
+							</p:selectOneMenu>
+							<p:message for="catagory" />
+							<h:outputText value="#{productController.catagory.catagoryName}" />
+
 						</h:panelGrid>
 
 						<p:commandButton value="Ajax" update="grid" icon="pi pi-check"
-							validateClient="true" style="margin-right:10px" actionListener="#{productController.saveProduct()}"/>
+							validateClient="true" style="margin-right:10px"
+							actionListener="#{productController.saveProduct()}" />
 
 					</p:panel>
 				</h:form>
@@ -58,7 +106,72 @@
 
 			<!-- List customer column -->
 
-			<div class="col col-lg-8"></div>
+			<div class="col col-lg-8">
+
+				<div class="product-list-wraper">
+					<h:form id="prod-lst-tbl" prependId="false">
+						<p:growl id="msgs" showDetail="true" />
+
+						<p:dataTable class="table" var="products" id="product-list"
+							editable="true" value="#{productController.productList}">
+							<f:facet name="header">
+            Product list
+        </f:facet>
+
+							<p:ajax event="rowEdit" listener="#{productController.onRowEdit}"
+								update="msgs" />
+							<p:ajax event="rowEditCancel"
+								listener="#{productController.onRowCancel}" update="msgs" />
+
+							<p:column headerText="Product Name">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{products.productName}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{products.productName}"
+											style="width:100%" label="Year" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Product Color">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{products.productColor1}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{products.productColor1}"
+											style="width:100%" label="Year" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Product Catagory">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{products.catagory.catagoryName}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{products.catagory.catagoryName}"
+											style="width:100%" label="Year" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+
+							<p:column headerText="MOD">
+								<p:rowEditor />
+								<p:commandButton update="product-list"
+									actionListener="#{productController.onRowDelete(products.productId)}" />
+							</p:column>
+
+						</p:dataTable>
+					</h:form>
+				</div>
+
+
+			</div>
 		</div>
 	</div>
 

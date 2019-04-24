@@ -10,10 +10,16 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+
+import org.primefaces.event.RowEditEvent;
 
 import com.solutioniabd.beans.ProductServiceLocal;
 import com.solutioniabd.entity.Catagory;
+import com.solutioniabd.entity.Customer;
+import com.solutioniabd.entity.Customeraddress;
 import com.solutioniabd.entity.Product;
 
 @Named
@@ -27,14 +33,21 @@ public class ProductController {
 	private Catagory catagory = new Catagory();
 
 	List<Product> productList;
+
+	private Map<String, String> colors;
+
+	private List<String> catList;
 	
-	private Map<String,String> colors;
-	
+	private String text1;
+
 	// Life cycle methods
 
 	@PostConstruct
 	void init() {
 		colors = colorMap();
+		catList = prodCatList();
+		
+		productList = productService.listProducts();
 		
 		System.out.println("Post constract called!!!");
 
@@ -48,6 +61,7 @@ public class ProductController {
 	// Save product information
 
 	public void saveProduct() {
+		product.setCatagory(catagory);
 		try {
 			productService.addProduct(product, catagory);
 
@@ -57,16 +71,57 @@ public class ProductController {
 
 		}
 	}
-	
+
 	// Helper methods
-	public Map<String,String> colorMap(){
-		colors = new HashMap<String,String>();
+	public Map<String, String> colorMap() {
+		colors = new HashMap<String, String>();
 		colors.put("Red", "Red");
 		colors.put("Green", "Green");
 		colors.put("Blue", "Blue");
 		colors.put("Yellow", "Yellow");
 		return colors;
 	}
+
+
+	public List<String> prodCatList() {
+		List<String> cat = new ArrayList<String>();
+		cat.add("Mobile");
+		cat.add("Headphone");
+		cat.add("Charger");
+		return cat;
+	}
+	
+	// Button and events
+	
+	 public void onRowEdit(RowEditEvent event) {
+	        FacesMessage msg = new FacesMessage("Car Edited");
+	        FacesContext.getCurrentInstance().addMessage(null, msg);
+	        Product product = (Product) event.getObject();
+	        Catagory catagory =(Catagory) product.getCatagory();
+	        productService.updateProduct(product,catagory);
+	        productList=productService.listProducts();
+	    }
+	     
+	    public void onRowCancel(RowEditEvent event) {
+	        FacesMessage msg = new FacesMessage("Edit Cancelled");
+	        FacesContext.getCurrentInstance().addMessage(null, msg);
+	    }
+	    
+	    public void onRowDelete(int productId) {
+	    	productService.removeProd(productId);
+	    	productList=productService.listProducts();
+	    }
+	    
+	    public List<String> completeText(String query) {
+	        List<String> results = new ArrayList<String>();
+	        for (Product product:productList) {
+	        	if (product.getProductName().toLowerCase().startsWith(query)) {
+	        		results.add(product.getProductName());
+	        	}
+	        }
+	         
+	        return results;
+	    }
 
 	// Getters and setters
 	public ProductServiceLocal getProductService() {
@@ -107,6 +162,22 @@ public class ProductController {
 
 	public void setColors(Map<String, String> colors) {
 		this.colors = colors;
+	}
+
+	public List<String> getCatList() {
+		return catList;
+	}
+
+	public String getText1() {
+		return text1;
+	}
+
+	public void setText1(String text1) {
+		this.text1 = text1;
+	}
+
+	public void setCatList(List<String> catList) {
+		this.catList = catList;
 	}
 
 }

@@ -10,7 +10,12 @@ import java.util.Date;
  * 
  */
 @Entity
-@NamedQuery(name="Product.findAll", query="SELECT p FROM Product p")
+@Table(name="product")
+@NamedQueries({
+	@NamedQuery(name="Product.findAll", query="SELECT p FROM Product p"),
+	@NamedQuery(name="Product.join.Catagory.findAll",query="SELECT p FROM Product p JOIN p.catagory c")
+})
+
 public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
 

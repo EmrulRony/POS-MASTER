@@ -11,6 +11,6 @@ import com.solutioniabd.entity.Product;
 public interface ProductServiceLocal {
 	public void addProduct(Product prod, Catagory cat);
 	public void updateProduct(Product prod, Catagory cat);
-	public void removeProd(Product prod , Catagory cat);
+	public void removeProd(int prodId);
 	public List<Product> listProducts();
 }
