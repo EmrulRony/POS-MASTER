@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputScript library="js" name="bootstrap.min.js" />
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+</h:head>
+<h:body>
+	<div class="nav-bar">
+		<ui:include src="/nav-bar.xhtml" />
+	</div>
+	<h1>Sell module</h1>
+
+	<!-- Bootstrap Grid -->
+	<div class="row">
+		<div class="col col-lg-6">
+
+			<h:form>
+				<p:panel header="PRODUCT">
+				
+				<h:panelGrid id="grid" columns="4" cellpadding="5">
+					<p:messages>
+						<p:autoUpdate />
+					</p:messages>
+
+					<p:outputLabel value="Select Product:" for="prodComlt" />
+					<p:autoComplete id="prodComlt" value="#{sellController.productText}"
+						completeMethod="#{sellController.completeProdName}" />
+					<p:message for="prodComlt" />
+					<h:outputText value="#{sellController.productText}" />
+
+
+					</h:panelGrid>
+
+					<p:commandButton value="Add to Cart" update="grid" icon="pi pi-check"
+						validateClient="true" style="margin-right:10px" />
+				</p:panel>
+			</h:form>
+
+		</div>
+
+		<div class="col col-lg-6"></div>
+
+	</div>
+
+</h:body>
+</html>
