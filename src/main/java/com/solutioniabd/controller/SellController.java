@@ -23,6 +23,10 @@ public class SellController {
 	
 	private String productText;
 	
+	private Product selectedProduct;
+	
+	private List<Product> cartProduct;
+	
 	
 	// Life-cycle methods
 	@PostConstruct
@@ -33,16 +37,24 @@ public class SellController {
 	}
 	
 	// Buttons and event handlers
-	public List<String> completeProdName(String query){
-		List <String> prodNameList = new LinkedList<>();
-		
+	public List<Product> completeProdName(String query){
+		List <Product> prodList = new LinkedList<>();
+
 		for (Product product:productList) {
 			if (product.getProductName().toLowerCase().startsWith(query.toLowerCase())){
-				prodNameList.add(product.getProductName());
+				prodList.add(product);
 			}
 		}
 		
-		return null;
+		return prodList;
+	}
+	
+	public void addToCart() {
+		cartProduct = getCartProduct();
+		for (Product product:cartProduct) {
+			System.out.println(product.getProductName()+"  "+product.getSellingPrice());
+		}
+		
 	}
 	
 	
@@ -63,6 +75,22 @@ public class SellController {
 
 	public void setProductText(String productText) {
 		this.productText = productText;
+	}
+
+	public List<Product> getCartProduct() {
+		return cartProduct;
+	}
+
+	public void setCartProduct(List<Product> cartProduct) {
+		this.cartProduct = cartProduct;
+	}
+
+	public Product getSelectedProduct() {
+		return selectedProduct;
+	}
+
+	public void setSelectedProduct(Product selectedProduct) {
+		this.selectedProduct = selectedProduct;
 	}
 	
 	

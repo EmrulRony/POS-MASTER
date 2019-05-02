@@ -11,6 +11,7 @@ import com.solutioniabd.entity.Catagory;
 import com.solutioniabd.entity.Product;
 
 @Stateless
+
 public class ProductService implements ProductServiceLocal {
 	
 	@PersistenceContext

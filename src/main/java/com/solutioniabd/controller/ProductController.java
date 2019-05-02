@@ -17,8 +17,6 @@ import org.primefaces.event.RowEditEvent;
 
 import com.solutioniabd.beans.ProductServiceLocal;
 import com.solutioniabd.entity.Catagory;
-import com.solutioniabd.entity.Customer;
-import com.solutioniabd.entity.Customeraddress;
 import com.solutioniabd.entity.Product;
 
 @Named
@@ -31,7 +29,7 @@ public class ProductController {
 	private Product product = new Product();
 	private Catagory catagory = new Catagory();
 
-	List<Product> productList;
+	private List<Product> productList;
 
 	private Map<String, String> colors;
 
@@ -67,7 +65,7 @@ public class ProductController {
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
-
+			productList = productService.listProducts();
 		}
 	}
 

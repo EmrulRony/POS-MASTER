@@ -95,7 +95,7 @@
 
 						</h:panelGrid>
 
-						<p:commandButton value="Ajax" update="grid" icon="pi pi-check"
+						<p:commandButton value="Add Product" update="prod-lst-tbl,grid" icon="pi pi-check"
 							validateClient="true" style="margin-right:10px"
 							actionListener="#{productController.saveProduct()}" />
 
@@ -107,7 +107,7 @@
 
 			<!-- List customer column -->
 
-			<div class="col col-lg-8">
+			<div class="col col-lg-8" >
 
 				<div class="product-list-wraper">
 					<h:form id="prod-lst-tbl" prependId="false">
