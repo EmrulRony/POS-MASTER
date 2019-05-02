@@ -19,8 +19,8 @@
 	<div class="row">
 		<div class="col col-lg-6">
 
-			<h:form>
-				<p:panel header="PRODUCT">
+			<h:form prependId="false">
+				<p:panel id="prod-pan" header="PRODUCT">
 					<p:messages>
 						<p:autoUpdate />
 					</p:messages>
@@ -32,24 +32,50 @@
 						<p:autoComplete id="prod-complt"
 							value="#{sellController.selectedProduct}"
 							completeMethod="#{sellController.completeProdName}" var="product"
-							itemLabel="#{product.productName}" itemValue="#{product}" converter="productConverter"/>
+							itemLabel="#{product.productName}" itemValue="#{product}"
+							converter="#{productConverter}" />
+						<h:outputText
+							value="#{sellController.selectedProduct.sellingPrice}" />
 						<p:message for="prod-complt" />
-
-
 
 
 					</h:panelGrid>
 
-					<p:commandButton value="Add to Cart" update="grid"
-						icon="pi pi-check" validateClient="true"
+
+					<p:commandButton value="Add to Cart"
+						update="grid,cart-tbl,tot-price" icon="pi pi-check"
+						validateClient="true"
 						actionListener="#{sellController.addToCart()}"
 						style="margin-right:10px" />
+
+
 				</p:panel>
 			</h:form>
 
 		</div>
 
-		<div class="col col-lg-6"></div>
+		<div class="col col-lg-6">
+
+			<div class="cart-tbl-wrap">
+
+				<p:dataTable id="cart-tbl" var="selProd"
+					value="#{sellController.cartProduct}">
+					<p:column headerText="Product Name">
+						<h:outputText value="#{selProd.productName}" />
+					</p:column>
+
+					<p:column headerText="Prod Price">
+						<h:outputText value="#{selProd.sellingPrice}" />
+					</p:column>
+
+
+				</p:dataTable>
+				<p:outputLabel for="tot-price" value="TotalPrice" />
+				<h:outputText id="tot-price" value="#{sellController.totalAmount}" />
+
+			</div>
+
+		</div>
 
 	</div>
 

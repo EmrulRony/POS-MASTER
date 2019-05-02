@@ -36,6 +36,7 @@ public class ProductController {
 	private List<String> catList;
 	
 	private String text1;
+	
 
 	// Life cycle methods
 
@@ -46,14 +47,10 @@ public class ProductController {
 		
 		productList = productService.listProducts();
 		
-		System.out.println("Post constract called!!!");
 
 	}
 
-	@PreDestroy
-	void dest() {
-		System.out.println("Pre destroy called!!!!");
-	}
+	
 
 	// Save product information
 
@@ -78,6 +75,8 @@ public class ProductController {
 		colors.put("Yellow", "Yellow");
 		return colors;
 	}
+	
+	
 
 
 	public List<String> prodCatList() {
@@ -165,16 +164,20 @@ public class ProductController {
 		return catList;
 	}
 
+	public void setCatList(List<String> catList) {
+		this.catList = catList;
+	}
+
+
+
 	public String getText1() {
 		return text1;
 	}
 
+
+
 	public void setText1(String text1) {
 		this.text1 = text1;
-	}
-
-	public void setCatList(List<String> catList) {
-		this.catList = catList;
 	}
 
 }
